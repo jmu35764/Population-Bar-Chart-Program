@@ -4,14 +4,21 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 int main()
 {
-	string filename;
+	string filename, townname;
+	int starting_year, pop_points;
+
+	starting_year = 1900;
 
 	cout << "Please enter filename \n";
 	cin >> filename;
+	cout << "Please enter town name \n";
+	cin >> townname;
+	cout << endl;
 
 	ifstream inFile(filename); // Open file for reading
 
@@ -21,10 +28,22 @@ int main()
 		return 1;
 	}
 
-	string line;
-	while (getline(inFile, line))
-	{ // Read line by line
-		cout << line << endl;
+	int population;
+	int star;
+
+	cout << townname << " Population Growth" << endl; // Title of table
+
+	while (inFile >> population) // Read file by line
+	{
+		pop_points = population/1000;
+		cout << starting_year << " " << setw(3);
+		starting_year += 20;
+		for (star = 0; star < pop_points; star++) // Loop for adding stars
+		{
+			cout << "*";
+		}
+
+		cout << endl;
 	}
 	inFile.close();
 	return 0;
